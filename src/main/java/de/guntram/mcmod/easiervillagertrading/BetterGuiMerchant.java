@@ -29,9 +29,6 @@ public class BetterGuiMerchant extends MerchantScreen implements AutoTrade {
     
     @Override
     public void trade(int tradeIndex) {
-        
-        boolean shiftSwapped = ConfigurationHandler.isShiftSwapped();
-        
         TradeOfferList trades=handler.getRecipes();
         TradeOffer recipe = trades.get(tradeIndex);
         int safeguard = 0;
@@ -41,7 +38,7 @@ public class BetterGuiMerchant extends MerchantScreen implements AutoTrade {
         &&  hasEnoughItemsInInventory(recipe)
         &&  canReceiveOutput(recipe.getSellItem())) {
             transact(recipe);
-            if (hasShiftDown() == shiftSwapped || ++safeguard > 50) {
+            if (hasShiftDown() == ++safeguard > 50) {
                 break;
             }
         }
@@ -63,9 +60,9 @@ public class BetterGuiMerchant extends MerchantScreen implements AutoTrade {
     }
 
     private boolean hasEnoughItemsInInventory(TradeOffer recipe) {
-        if (!hasEnoughItemsInInventory(recipe.getAdjustedFirstBuyItem()))
+        if (!hasEnoughItemsInInventory(recipe.getDisplayedFirstBuyItem()))
             return false;
-        if (!hasEnoughItemsInInventory(recipe.getSecondBuyItem()))
+        if (!hasEnoughItemsInInventory(recipe.getDisplayedSecondBuyItem()))
             return false;
         return true;
     }
@@ -108,8 +105,8 @@ public class BetterGuiMerchant extends MerchantScreen implements AutoTrade {
     private void transact(TradeOffer recipe) {
         //System.out.println("fill input slots called");
         int putback0, putback1=-1;
-        putback0=fillSlot(0, recipe.getAdjustedFirstBuyItem());
-        putback1=fillSlot(1, recipe.getSecondBuyItem());
+        putback0=fillSlot(0, recipe.getDisplayedFirstBuyItem());
+        putback1=fillSlot(1, recipe.getDisplayedSecondBuyItem());
 
         getslot(2, recipe.getSellItem(), putback0, putback1);
         //System.out.println("putting back to slot "+putback0+" from 0, and to "+putback1+"from 1");
