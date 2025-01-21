@@ -48,7 +48,7 @@ dependencies {
     mappings   "net.fabricmc:yarn:${Versions['yarn_mappings']}:v2"
     modImplementation "net.fabricmc:fabric-loader:${Versions['loader_version']}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${Versions['fabric_version']}"
-    modImplementation "com.terraformersmc:modmenu:${Versions['modmenu_version']}"
+//    modImplementation "com.terraformersmc:modmenu:${Versions['modmenu_version']}"
 //    modImplementation "de.guntram.mcmod:GBfabrictools:${Versions['gbfabrictools_version']}"
 //    include    "de.guntram.mcmod:GBfabrictools:${Versions['gbfabrictools_version']}"
 }
